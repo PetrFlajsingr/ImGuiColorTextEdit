@@ -2405,7 +2405,17 @@ void TextEditor::ColorizeInternal()
 						auto& startStr = mLanguageDefinition.mCommentStart;
 						auto& singleStartStr = mLanguageDefinition.mSingleLineComment;
 
+<<<<<<< HEAD
 						if (!withinSingleLineComment && currentIndex + startStr.size() <= line.size() &&
+=======
+						if (singleStartStr.size() > 0 &&
+							currentIndex + singleStartStr.size() <= line.size() &&
+							equals(singleStartStr.begin(), singleStartStr.end(), from, from + singleStartStr.size(), pred))
+						{
+							withinSingleLineComment = true;
+						}
+						else if (startStr.size() != 0 && !withinSingleLineComment && currentIndex + startStr.size() <= line.size() &&
+>>>>>>> 72e5f098e9637d485c890b44608e28a4ef31b263
 							equals(startStr.begin(), startStr.end(), from, from + startStr.size(), pred))
 						{
 							commentStartLine = currentLine;
