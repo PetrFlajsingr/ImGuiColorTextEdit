@@ -6,8 +6,14 @@
 
 #include "TextEditor.h"
 
+#ifndef IMGUI_DEFINE_MATH_OPERATORS
 #define IMGUI_DEFINE_MATH_OPERATORS
+#endif
 #include "imgui.h" // for imGui::GetCurrentWindow()
+
+#ifndef isascii
+#define isascii(a) ((unsigned)(a) < 128)
+#endif
 
 // TODO
 // - multiline comments vs single-line: latter is blocking start of a ML
