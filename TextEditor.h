@@ -39,6 +39,7 @@ public:
 		CurrentLineEdge,
 		WhiteSpace,
 		WhiteSpaceTab,
+                WarningMarker,
 		Max
 	};
 
@@ -132,6 +133,7 @@ public:
 	typedef std::unordered_map<std::string, Identifier> Identifiers;
 	typedef std::unordered_set<std::string> Keywords;
 	typedef std::map<int, std::string> ErrorMarkers;
+        typedef std::map<int, std::string> WarningMarkers;
 	typedef std::unordered_set<int> Breakpoints;
 	typedef std::array<ImU32, (unsigned)PaletteIndex::Max> Palette;
 	typedef uint8_t Char;
@@ -195,7 +197,13 @@ public:
 	void SetPalette(const Palette& aValue);
 
 	void SetErrorMarkers(const ErrorMarkers& aMarkers) { mErrorMarkers = aMarkers; }
+        const ErrorMarkers &GetErrorMarkers() const { return mErrorMarkers; }
+
 	void SetBreakpoints(const Breakpoints& aMarkers) { mBreakpoints = aMarkers; }
+        const Breakpoints & GetBreakpoints() const { return mBreakpoints; }
+
+        void SetWarningMarkers(const WarningMarkers &aMarkers) { mWarningMarkers = aMarkers; }
+        const WarningMarkers &GetWarningMarkers() const { return mWarningMarkers; }
 
 	void Render(const char* aTitle, const ImVec2& aSize = ImVec2(), bool aBorder = false);
 	void SetText(const std::string& aText);
@@ -389,6 +397,7 @@ private:
 	bool mCheckComments;
 	Breakpoints mBreakpoints;
 	ErrorMarkers mErrorMarkers;
+        WarningMarkers mWarningMarkers;
 	ImVec2 mCharAdvance;
 	Coordinates mInteractiveStart, mInteractiveEnd;
 	std::string mLineBuffer;
